@@ -15,7 +15,7 @@ source:
   sha256: 7d5a1e47ba3f41050e92ac27fe12c9ffd8dea67e132c43ff071dcdb0fad4ae45
 
 build:
-  number: 0
+  number: 1
   script:
     - R CMD INSTALL --build .  # [win]
     - R CMD INSTALL --configure-args="CPPFLAGS=-I$PREFIX/include LDFLAGS=-L$PREFIX/lib" --build .  # [not win]
@@ -27,13 +27,13 @@ build:
 requirements:
   build:
     - r-base
-    - libnetcdf 4.4.*
+    - libnetcdf 4.5.*
     - udunits2
     - posix  # [win]
     - {{native}}toolchain  # [win]
     - gcc  # [not win]
   run:
-    - libnetcdf 4.4.*
+    - libnetcdf >=4.5
     - udunits2
     - r-base
     - libgcc  # [not win]
@@ -42,6 +42,8 @@ test:
   commands:
     - $R -e "library('RNetCDF')"  # [not win]
     - "\"%R%\" -e \"library('RNetCDF')\""  # [win]
+    - conda inspect linkages -p $PREFIX $PKG_NAME  # [not win]
+    - conda inspect objects -p $PREFIX $PKG_NAME  # [osx]
 
 about:
   home: https://cran.r-project.org/web/packages/RNetCDF
