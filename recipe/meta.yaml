@@ -15,7 +15,8 @@ source:
   sha256: 7d5a1e47ba3f41050e92ac27fe12c9ffd8dea67e132c43ff071dcdb0fad4ae45
 
 build:
-  number: 1
+  merge_build_host: True  # [win]
+  number: 2
   script:
     - R CMD INSTALL --build .  # [win]
     - R CMD INSTALL --configure-args="CPPFLAGS=-I$PREFIX/include LDFLAGS=-L$PREFIX/lib" --build .  # [not win]
@@ -26,17 +27,17 @@ build:
 
 requirements:
   build:
-    - r-base
-    - libnetcdf 4.5.*
-    - udunits2
     - posix  # [win]
-    - {{native}}toolchain  # [win]
-    - gcc  # [not win]
+    - {{ compiler('c') }}        # [unix]
+    - {{ compiler('m2w64_c') }}  # [win]
+  host:
+    - r-base
+    - libnetcdf
+    - udunits2
   run:
-    - libnetcdf >=4.5
+    - libnetcdf
     - udunits2
     - r-base
-    - libgcc  # [not win]
 
 test:
   commands:
