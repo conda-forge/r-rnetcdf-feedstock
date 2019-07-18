@@ -16,7 +16,7 @@ source:
 
 build:
   merge_build_host: True  # [win]
-  number: 1002
+  number: 1003
   script:
     - R CMD INSTALL --build .  # [win]
     - R CMD INSTALL --configure-args="CPPFLAGS=-I$PREFIX/include LDFLAGS=-L$PREFIX/lib" --build .  # [not win]

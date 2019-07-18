@@ -1,15 +1,20 @@
+c_compiler:
+- gcc
+c_compiler_version:
+- '7'
 channel_sources:
 - conda-forge,defaults
 channel_targets:
 - conda-forge main
+docker_image:
+- condaforge/linux-anvil-comp7
 libnetcdf:
-- '4.6'
-m2w64_c_compiler:
-- m2w64-toolchain
+- 4.6.2
 pin_run_as_build:
   libnetcdf:
-    max_pin: x.x
-  r-base:
     max_pin: x.x.x
+  r-base:
+    min_pin: x.x
+    max_pin: x.x
 r_base:
 - 3.5.1
