@@ -18,11 +18,7 @@ build:
   merge_build_host: True  # [win]
   number: 1004
   script:
-    - R CMD INSTALL --build .  # [win]
-    - export LD_LIBRARY_PATH=${PREFIX}/lib:$LD_LIBRARY_PATH  # [unix]
-    - export DYLD_LIBRARY_PATH=${PREFIX}/lib:$DYLD_LIBRARY_PATH  # [osx]
-    - R CMD INSTALL --build .  # [unix]
-    - cat $SRC_DIR/config.log  # [osx]
+    - R CMD INSTALL --build .
   skip: True  # [win32]
   rpaths:
     - lib/R/lib/
