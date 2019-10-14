@@ -18,8 +18,9 @@ build:
   merge_build_host: True  # [win]
   number: 1004
   script:
-    - R CMD INSTALL --build --host=%HOST% .  # [win]
-    - R CMD INSTALL --configure-args="CPPFLAGS=-I$PREFIX/include LDFLAGS=-L$PREFIX/lib" --build --host=$HOST .  # [not win]
+    - R CMD INSTALL --build .  # [win]
+    - export LD_LIBRARY_PATH=${PREFIX}/lib:$LD_LIBRARY_PATH  # [unix]
+    - R CMD INSTALL --configure-args="CPPFLAGS=-I${PREFIX}/include LDFLAGS=-L${PREFIX}/lib" --build .  # [unix]
   skip: True  # [win32]
   rpaths:
     - lib/R/lib/
@@ -32,11 +33,11 @@ requirements:
     - {{ compiler('m2w64_c') }}  # [win]
   host:
     - r-base
-    - libnetcdf
-    - udunits2
+    - libnetcdf >=4.1.3
+    - udunits2 >=2.0.4
   run:
-    - libnetcdf
-    - udunits2
+    - libnetcdf >=4.1.3
+    - udunits2 >=2.0.4
     - r-base
 
 test:
