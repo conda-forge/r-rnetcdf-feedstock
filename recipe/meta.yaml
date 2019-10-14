@@ -20,6 +20,7 @@ build:
   script:
     - R CMD INSTALL --build .  # [win]
     - export LD_LIBRARY_PATH=${PREFIX}/lib:$LD_LIBRARY_PATH  # [unix]
+    - export DYLD_LIBRARY_PATH=${PREFIX}/lib:$DYLD_LIBRARY_PATH  # [osx]
     - R CMD INSTALL --configure-args="CPPFLAGS=-I${PREFIX}/include LDFLAGS=-L${PREFIX}/lib" --build .  # [unix]
   skip: True  # [win32]
   rpaths:
@@ -33,11 +34,11 @@ requirements:
     - {{ compiler('m2w64_c') }}  # [win]
   host:
     - r-base
-    - libnetcdf >=4.1.3
-    - udunits2 >=2.0.4
+    - libnetcdf
+    - udunits2
   run:
-    - libnetcdf >=4.1.3
-    - udunits2 >=2.0.4
+    - libnetcdf
+    - udunits2
     - r-base
 
 test:
