@@ -1,4 +1,4 @@
-{% set version = '1.9-1' %}
+{% set version = '2.0-3' %}
 
 {% set posix = 'm2-' if win else '' %}
 {% set native = 'm2w64-' if win else '' %}
@@ -12,14 +12,14 @@ source:
   url:
     - https://cran.r-project.org/src/contrib/RNetCDF_{{ version }}.tar.gz
     - https://cran.r-project.org/src/contrib/Archive/RNetCDF/RNetCDF_{{ version }}.tar.gz
-  sha256: 7d5a1e47ba3f41050e92ac27fe12c9ffd8dea67e132c43ff071dcdb0fad4ae45
+  sha256: d513abfefe725f4253287ca61e507e1770c6a2cfab2cd2cd00d58de521a5adc5
 
 build:
   merge_build_host: True  # [win]
   number: 1004
   script:
-    - R CMD INSTALL --build .  # [win]
-    - R CMD INSTALL --configure-args="CPPFLAGS=-I$PREFIX/include LDFLAGS=-L$PREFIX/lib" --build .  # [not win]
+    - R CMD INSTALL --build --host=%HOST% .  # [win]
+    - R CMD INSTALL --configure-args="CPPFLAGS=-I$PREFIX/include LDFLAGS=-L$PREFIX/lib" --build --host=$HOST .  # [not win]
   skip: True  # [win32]
   rpaths:
     - lib/R/lib/
@@ -60,3 +60,4 @@ about:
 extra:
   recipe-maintainers:
     - ocefpaf
+    - marcelotrevisani
