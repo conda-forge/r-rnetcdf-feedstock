@@ -21,7 +21,7 @@ build:
     - R CMD INSTALL --build .  # [win]
     - export LD_LIBRARY_PATH=${PREFIX}/lib:$LD_LIBRARY_PATH  # [unix]
     - export DYLD_LIBRARY_PATH=${PREFIX}/lib:$DYLD_LIBRARY_PATH  # [osx]
-    - R CMD INSTALL --configure-args="CPPFLAGS=-I${PREFIX}/include LDFLAGS=-L${PREFIX}/lib" --build .  # [unix]
+    - R CMD INSTALL --build .  # [unix]
     - cat $SRC_DIR/config.log  # [osx]
   skip: True  # [win32]
   rpaths:
