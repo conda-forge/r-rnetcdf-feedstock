@@ -16,7 +16,7 @@ source:
 
 build:
   merge_build_host: true  # [win]
-  number: 0
+  number: 1
   script:
     - R CMD INSTALL --build .
   skip: true  # [win32]
@@ -42,8 +42,6 @@ test:
   commands:
     - $R -e "library('RNetCDF')"  # [not win]
     - "\"%R%\" -e \"library('RNetCDF')\""  # [win]
-    - conda inspect linkages -p $PREFIX $PKG_NAME  # [not win]
-    - conda inspect objects -p $PREFIX $PKG_NAME  # [osx]
 
 about:
   home: https://cran.r-project.org/web/packages/RNetCDF
