@@ -54,3 +54,4 @@ extra:
   recipe-maintainers:
     - ocefpaf
     - marcelotrevisani
+    - conda-forge/r
