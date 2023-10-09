@@ -8,8 +8,8 @@ package:
 
 source:
   url:
-    - https://cran.r-project.org/src/contrib/RNetCDF_{{ version }}.tar.gz
-    - https://cran.r-project.org/src/contrib/Archive/RNetCDF/RNetCDF_{{ version }}.tar.gz
+    - {{ cran_mirror }}/src/contrib/RNetCDF_{{ version }}.tar.gz
+    - {{ cran_mirror }}/src/contrib/Archive/RNetCDF/RNetCDF_{{ version }}.tar.gz
   sha256: 80626172829077807c6f14506782ffd85a316f0c09539c3d64d4594edc756d0b
 
 build:
@@ -17,24 +17,35 @@ build:
   number: 0
   script:
     - R CMD INSTALL --build .
-  skip: true  # [win32]
   rpaths:
     - lib/R/lib/
     - lib/
 
 requirements:
   build:
-    - posix  # [win]
-    - {{ compiler('c') }}        # [unix]
-    - {{ compiler('m2w64_c') }}  # [win]
+  build:
+    - {{ compiler('c') }}              # [not win]
+    - {{ compiler('m2w64_c') }}        # [win]
+    - {{ posix }}filesystem        # [win]
+    - {{ posix }}sed               # [win]
+    - {{ posix }}grep              # [win]
+    - {{ posix }}autoconf
+    - {{ posix }}automake          # [not win]
+    - {{ posix }}automake-wrapper  # [win]
+    - {{ posix }}pkg-config
+    - {{ posix }}make
+    - {{ posix }}coreutils         # [win]
+    - {{ posix }}zip               # [win]
+    - cross-r-base {{ r_base }}    # [build_platform != target_platform]
   host:
     - r-base
     - libnetcdf
     - udunits2
   run:
+    - r-base
+    - {{ native }}gcc-libs         # [win]
     - libnetcdf
     - udunits2
-    - r-base
 
 test:
   commands:
@@ -44,12 +55,14 @@ test:
 about:
   home: https://cran.r-project.org/web/packages/RNetCDF
   license: GPL-2.0-or-later
-  license_file: LICENSE
   summary: An interface to the NetCDF file format designed by Unidata for efficient storage of array-oriented scientific data and descriptions. The R interface is closely based on the C API of the NetCDF library, and it includes calendar conversions from the Unidata UDUNITS library. The current implementation supports all
     operations on NetCDF datasets in classic and 64-bit offset file formats, and NetCDF4-classic format is supported for reading and modification of existing files.
+  license_file:
+    - {{ environ["PREFIX"] }}/lib/R/share/licenses/GPL-2
+    - LICENSE
 
 extra:
   recipe-maintainers:
+    - conda-forge/r
     - ocefpaf
     - marcelotrevisani
-    - conda-forge/r
