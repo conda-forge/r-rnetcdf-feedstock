@@ -20,7 +20,7 @@ build:
   rpaths:
     - lib/R/lib/
     - lib/
- missing_dso_whitelist:
+  missing_dso_whitelist:
     - '*/R.dll'           # [win]
 
 requirements:
@@ -40,9 +40,13 @@ requirements:
     - cross-r-base {{ r_base }}    # [build_platform != target_platform]
   host:
     - r-base
+    - libnetcdf
+    - udunits2
   run:
     - r-base
     - {{ native }}gcc-libs         # [win]
+    - libnetcdf
+    - udunits2
 
 test:
   commands:
