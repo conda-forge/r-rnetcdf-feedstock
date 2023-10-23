@@ -1,4 +1,4 @@
-{% set version = "2.6-2" %}
+{% set version = "2.8-1" %}
 
 {% set posix = 'm2-' if win else '' %}
 {% set native = 'm2w64-' if win else '' %}
@@ -12,11 +12,11 @@ source:
   url:
     - https://cran.r-project.org/src/contrib/RNetCDF_{{ version }}.tar.gz
     - https://cran.r-project.org/src/contrib/Archive/RNetCDF/RNetCDF_{{ version }}.tar.gz
-  sha256: b4de45798fc5f3021f23187bc52d5931a86a4f5c91fcdba7ca4f92c966ec022e
+  sha256: 660148cb7e272859145de4da64f57ec959110bd6863af67f44ebf36fc5a7513e
 
 build:
   merge_build_host: true  # [win]
-  number: 3
+  number: 0
   script:
     - R CMD INSTALL --build .
   skip: true  # [win32]
