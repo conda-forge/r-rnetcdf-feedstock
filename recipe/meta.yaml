@@ -1,5 +1,4 @@
 {% set version = "2.8-1" %}
-
 {% set posix = 'm2-' if win else '' %}
 {% set native = 'm2w64-' if win else '' %}
 
@@ -8,10 +7,9 @@ package:
   version: {{ version|replace("-", "_") }}
 
 source:
-  fn: RNetCDF_{{ version }}.tar.gz
   url:
-    - https://cran.r-project.org/src/contrib/RNetCDF_{{ version }}.tar.gz
-    - https://cran.r-project.org/src/contrib/Archive/RNetCDF/RNetCDF_{{ version }}.tar.gz
+    - {{ cran_mirror }}/src/contrib/RNetCDF_{{ version }}.tar.gz
+    - {{ cran_mirror }}/src/contrib/Archive/RNetCDF/RNetCDF_{{ version }}.tar.gz
   sha256: 660148cb7e272859145de4da64f57ec959110bd6863af67f44ebf36fc5a7513e
 
 build:
@@ -19,24 +17,32 @@ build:
   number: 0
   script:
     - R CMD INSTALL --build .
-  skip: true  # [win32]
   rpaths:
     - lib/R/lib/
     - lib/
+ missing_dso_whitelist:
+    - '*/R.dll'           # [win]
 
 requirements:
   build:
-    - posix  # [win]
-    - {{ compiler('c') }}        # [unix]
-    - {{ compiler('m2w64_c') }}  # [win]
+    - {{ compiler('c') }}              # [not win]
+    - {{ compiler('m2w64_c') }}        # [win]
+    - {{ posix }}filesystem        # [win]
+    - {{ posix }}sed               # [win]
+    - {{ posix }}grep              # [win]
+    - {{ posix }}autoconf
+    - {{ posix }}automake          # [not win]
+    - {{ posix }}automake-wrapper  # [win]
+    - {{ posix }}pkg-config
+    - {{ posix }}make
+    - {{ posix }}coreutils         # [win]
+    - {{ posix }}zip               # [win]
+    - cross-r-base {{ r_base }}    # [build_platform != target_platform]
   host:
     - r-base
-    - libnetcdf
-    - udunits2
   run:
-    - libnetcdf
-    - udunits2
     - r-base
+    - {{ native }}gcc-libs         # [win]
 
 test:
   commands:
@@ -46,12 +52,15 @@ test:
 about:
   home: https://cran.r-project.org/web/packages/RNetCDF
   license: GPL-2.0-or-later
-  license_file: LICENSE
   summary: An interface to the NetCDF file format designed by Unidata for efficient storage of array-oriented scientific data and descriptions. The R interface is closely based on the C API of the NetCDF library, and it includes calendar conversions from the Unidata UDUNITS library. The current implementation supports all
     operations on NetCDF datasets in classic and 64-bit offset file formats, and NetCDF4-classic format is supported for reading and modification of existing files.
+  license_family: GPL2
+  license_file:
+    - {{ environ["PREFIX"] }}/lib/R/share/licenses/GPL-2
+    - LICENSE
 
 extra:
   recipe-maintainers:
+    - conda-forge/r
     - ocefpaf
     - marcelotrevisani
-    - conda-forge/r
