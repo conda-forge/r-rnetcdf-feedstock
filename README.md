@@ -3,11 +3,28 @@ About r-rnetcdf-feedstock
 
 Feedstock license: [BSD-3-Clause](https://github.com/conda-forge/r-rnetcdf-feedstock/blob/main/LICENSE.txt)
 
-Home: https://cran.r-project.org/web/packages/RNetCDF
+
+About r-rnetcdf
+---------------
+
+Home: https://www.unidata.ucar.edu/software/netcdf/
 
 Package license: GPL-2.0-or-later
 
-Summary: An interface to the NetCDF file format designed by Unidata for efficient storage of array-oriented scientific data and descriptions. The R interface is closely based on the C API of the NetCDF library, and it includes calendar conversions from the Unidata UDUNITS library. The current implementation supports all operations on NetCDF datasets in classic and 64-bit offset file formats, and NetCDF4-classic format is supported for reading and modification of existing files.
+Summary: An interface to the 'NetCDF' file formats designed by Unidata for efficient storage of array-oriented scientific data and descriptions. Most capabilities of 'NetCDF' version 4 are supported. Optional conversions of time units are enabled by 'UDUNITS' version 2, also from Unidata.
+
+Development: https://github.com/mjwoods/RNetCDF
+
+About r-rnetcdf
+---------------
+
+Home: https://www.unidata.ucar.edu/software/netcdf/
+
+Package license: GPL-2.0-or-later
+
+Summary: An interface to the 'NetCDF' file formats designed by Unidata for efficient storage of array-oriented scientific data and descriptions. Most capabilities of 'NetCDF' version 4 are supported. Optional conversions of time units are enabled by 'UDUNITS' version 2, also from Unidata.
+
+Development: https://github.com/mjwoods/RNetCDF
 
 Current build status
 ====================
