@@ -1,4 +1,4 @@
-{% set version = "2.6-2" %}
+{% set version = "2.9-1" %}
 {% set posix = 'm2-' if win else '' %}
 {% set native = 'm2w64-' if win else '' %}
 
@@ -10,14 +10,15 @@ source:
   url:
     - {{ cran_mirror }}/src/contrib/RNetCDF_{{ version }}.tar.gz
     - {{ cran_mirror }}/src/contrib/Archive/RNetCDF/RNetCDF_{{ version }}.tar.gz
-  sha256: b4de45798fc5f3021f23187bc52d5931a86a4f5c91fcdba7ca4f92c966ec022e
+  sha256: 5c7e2b98769632c107650864425a19fc7c399bceb55cb418c4459658ce23c142
 
 build:
   merge_build_host: true  # [win]
-  number: 4
+  number: 0
   rpaths:
     - lib/R/lib/
     - lib/
+  skip: true  # [win]
 
 requirements:
   build:
@@ -55,10 +56,7 @@ about:
     - {{ environ["PREFIX"] }}/lib/R/share/licenses/GPL-2
     - {{ environ["PREFIX"] }}/lib/R/share/licenses/GPL-3
     - LICENSE
-  summary: An interface to the 'NetCDF' file formats designed by Unidata for efficient 
-    storage of array-oriented scientific data and descriptions. Most capabilities of 
-    'NetCDF' version 4 are supported. Optional conversions of time units are enabled by 
-    'UDUNITS' version 2, also from Unidata.
+  summary: An interface to the 'NetCDF' file formats designed by Unidata for efficient storage of array-oriented scientific data and descriptions. Most capabilities of 'NetCDF' version 4 are supported. Optional conversions of time units are enabled by 'UDUNITS' version 2, also from Unidata.
 
 extra:
   recipe-maintainers:
