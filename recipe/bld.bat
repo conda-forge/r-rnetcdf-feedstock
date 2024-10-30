@@ -1,2 +1,5 @@
+set CPPFLAGS=-I%LIBRARY_PREFIX:\=/%/include
+set LDFLAGS=-L%LIBRARY_PREFIX:\=/%/lib
+
 "%R%" CMD INSTALL --build . %R_ARGS%
 IF %ERRORLEVEL% NEQ 0 exit /B 1
