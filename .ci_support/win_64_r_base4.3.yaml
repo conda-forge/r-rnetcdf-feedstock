@@ -5,11 +5,11 @@ channel_targets:
 cran_mirror:
 - https://cran.r-project.org
 libnetcdf:
-- 4.9.2
+- 4.9.3
 m2w64_c_compiler:
 - gcc
 m2w64_c_compiler_version:
-- '13'
+- '14'
 m2w64_c_stdlib:
 - m2w64-sysroot
 m2w64_c_stdlib_version:
