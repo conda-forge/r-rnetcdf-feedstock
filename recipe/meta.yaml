@@ -1,4 +1,4 @@
-{% set version = "2.11-1" %}
+{% set version = "2.11-2" %}
 {% set posix = 'm2-' if win else '' %}
 
 package:
@@ -9,10 +9,10 @@ source:
   url:
     - {{ cran_mirror }}/src/contrib/RNetCDF_{{ version }}.tar.gz
     - {{ cran_mirror }}/src/contrib/Archive/RNetCDF/RNetCDF_{{ version }}.tar.gz
-  sha256: 28ac9539c080a96aace75caae84fab31518e48b2578b2e74c523b354e2617f58
+  sha256: 458a26f758745b24e82a4fcaee5a52c6021ea93c4986617ba9d48a8adcbb704f
 
 build:
-  number: 4
+  number: 0
   rpaths:
     - lib/R/lib/
     - lib/
